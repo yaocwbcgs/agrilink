@@ -46,7 +46,8 @@ for (const l of [...links].sort()) {
     text: document.body.innerText.slice(0, 400),
     len: document.body.innerText.length,
   }))
-  const is404 = /404|页面不存在|找不到该页面|页面走丢/i.test(info.text)
+  // 用 404 页的唯一文案判定，避免机型编号（如 LX2404）含 "404" 造成误报
+  const is404 = /这一页没有找到|Error\s*404/.test(info.text)
   const blank = info.len < 80
   const err = pageErrors.length > 0
   if (is404 || blank || err) {
