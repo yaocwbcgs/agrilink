@@ -1,0 +1,41 @@
+{
+  "name": "agri-link",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --port 4173",
+    "lint": "oxlint",
+    "qa": "node scripts/qa.mjs",
+    "qa:flow": "node scripts/flow.mjs",
+    "qa:links": "node scripts/links.mjs"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
+    "lucide-react": "^1.69.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5",
+    "recharts": "^3.10.1",
+    "tailwind-merge": "^3.7.0",
+    "zustand": "^5.0.16"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "autoprefixer": "^10.6.2",
+    "oxlint": "^1.90.0",
+    "playwright-core": "^1.64.1",
+    "postcss": "^8.5.32",
+    "tailwindcss": "^3.4.17",
+    "typescript": "~7.0.2",
+    "vite": "^8.3.6"
+  },
+  "description": "耘链 AGRI LINK — 农业综合服务平台（前端演示版）"
+}

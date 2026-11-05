@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --forest: #173d32;
+    --moss: #34745b;
+    --sage: #83a88b;
+    --cream: #f6f5f0;
+    --sand: #edeadf;
+    --clay: #e69a4a;
+    --ink: #26342d;
+    --muted: #7a857d;
+    --line: #dfdbce;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  /* 防止图表提示层与装饰元素造成的横向滚动；clip 不创建滚动容器，sticky 仍然有效 */
+  main {
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-sans font-semibold text-forest;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: #cfe0d4;
+    color: #173d32;
+  }
+
+  :focus-visible {
+    outline: 2px solid #34745b;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cdd3c5;
+    border-radius: 999px;
+    border: 3px solid #f6f5f0;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b3bcaa;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-[1340px] px-5 sm:px-6 lg:px-10;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-moss;
+  }
+
+  .num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  .card {
+    @apply rounded-card border border-line/90 bg-white shadow-card;
+  }
+
+  .hairline {
+    @apply border-line/80;
+  }
+
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover::after,
+  .link-underline[data-active='true']::after {
+    transform: scaleX(1);
+  }
+
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
+  }
+
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, #e9e6da 0%, #f4f2e9 40%, #e9e6da 80%);
+    background-size: 480px 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+
+  .field {
+    @apply w-full rounded-[10px] border border-line bg-white px-3.5 py-2.5 text-[14px] text-ink transition
+      placeholder:text-muted/60 hover:border-sage/70 focus:border-moss focus:outline-none focus:ring-4 focus:ring-moss/10;
+  }
+
+  .field-error {
+    @apply border-[#C2573F] focus:border-[#C2573F] focus:ring-[#C2573F]/10;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3 py-1 text-xs
+      text-ink/75 transition hover:border-moss/50 hover:text-forest;
+  }
+
+  .chip-active {
+    @apply border-forest bg-forest text-cream hover:border-forest hover:text-cream;
+  }
+
+  .table-head {
+    @apply font-mono text-[11px] uppercase tracking-[0.14em] text-muted;
+  }
+}
+
+@layer utilities {
+  .mask-fade-r {
+    mask-image: linear-gradient(to right, black 78%, transparent 100%);
+  }
+
+  .bg-grid {
+    background-image: linear-gradient(to right, rgba(23, 61, 50, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(23, 61, 50, 0.055) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .writing-vertical {
+    writing-mode: vertical-rl;
+  }
+}
+
+.recharts-surface {
+  overflow: visible;
+}
+.recharts-cartesian-axis-tick text {
+  font-size: 11px;
+  fill: #7a857d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
